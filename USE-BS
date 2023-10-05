@@ -1,0 +1,44 @@
+import random
+import time
+
+def guess_number():
+    score = 0
+    while True:
+        print("\nWelcome to the Number Guessing Game!")
+        print("I have selected a random number between 1 and 100. Can you guess it?")
+        
+        number_to_guess = random.randint(1, 100)
+        attempts = 0
+        start_time = time.time()
+
+        while True:
+            try:
+                player_guess = int(input("Enter your guess: "))
+                attempts += 1
+
+                if player_guess < number_to_guess:
+                    print("Too low! Try again.")
+                elif player_guess > number_to_guess:
+                    print("Too high! Try again.")
+                else:
+                    end_time = time.time()
+                    time_taken = round(end_time - start_time, 2)
+                    print(f"Congratulations! You guessed the number {number_to_guess} in {attempts} attempts and {time_taken} seconds.")
+                    score += 1
+                    break
+
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
+            if attempts >= 10:
+                print(f"Sorry, you've reached the maximum number of attempts. The correct number was {number_to_guess}.")
+                break
+
+        play_again = input("Do you want to play again? (yes/no): ").lower()
+        if play_again != 'yes':
+            print(f"Your total score: {score}")
+            print("Thanks for playing! Goodbye!")
+            break
+
+if __name__ == "__main__":
+    guess_number()
